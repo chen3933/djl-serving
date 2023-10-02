@@ -86,6 +86,9 @@ else
     ${env_file} \
     -e TEST_TELEMETRY_COLLECTION='true' \
     -e SERVING_OPTS='-Dai.djl.logging.level=debug' \
+    -e AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} \
+    -e AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} \
+    -e AWS_SESSION_TOKEN=${AWS_SESSION_TOKEN} \
     $uid_mapping \
     ${runtime:+--runtime="${runtime}"} \
     ${shm:+--shm-size="${shm}"} \
