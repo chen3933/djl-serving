@@ -19,12 +19,14 @@ ARG torch_wheel="https://aws-pytorch-unified-cicd-binaries.s3.us-west-2.amazonaw
 ARG ft_wheel="https://publish.djl.ai/fastertransformer/fastertransformer-0.24.0-py3-none-any.whl"
 ARG tb_wheel="https://publish.djl.ai/tritonserver/r23.04/tritontoolkit-23.4-py3-none-any.whl"
 ARG peft_wheel="https://publish.djl.ai/peft/peft-0.5.0alpha-py3-none-any.whl"
-ARG seq_scheduler_wheel="https://publish.djl.ai/seq_scheduler/seq_scheduler-nightly-py3-none-any.whl"
+ARG seq_scheduler_wheel="https://publish.djl.ai/seq_scheduler/seq_scheduler-0.1.0-py3-none-any.whl"
 ARG ompi_version=4.1.4
 ARG protobuf_version=3.20.3
 ARG transformers_version=4.33.2
 ARG accelerate_version=0.23.0
 ARG bitsandbytes_version=0.41.1
+ARG optimum_version=1.13.2
+ARG auto_gptq_version=0.4.2
 
 EXPOSE 8080
 
@@ -65,7 +67,8 @@ RUN apt-get update && apt-get install -y wget git libnuma-dev zlib1g-dev rapidjs
     cd ../../ && rm -rf ompi && \
     scripts/install_python.sh ${python_version} && \
     pip3 install ${torch_wheel} ${ft_wheel} ${tb_wheel} ${peft_wheel} ${seq_scheduler_wheel} safetensors protobuf==${protobuf_version} && \
-    pip3 install transformers==${transformers_version} accelerate==${accelerate_version} bitsandbytes==${bitsandbytes_version} \
+    pip3 install transformers==${transformers_version} accelerate==${accelerate_version} \
+    bitsandbytes==${bitsandbytes_version} optimum==${optimum_version} auto-gptq==${auto_gptq_version} \
     scipy einops && \
     pip3 install cmake sentencepiece bfloat16 tiktoken && \
     pip3 cache purge && \
